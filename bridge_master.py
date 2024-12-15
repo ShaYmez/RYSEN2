@@ -149,7 +149,7 @@ def config_API(_config, _bridges):
 
 
     application = Application([FD_API],
-        tns='adn.api',
+        tns='rysen.api',
         in_protocol=HttpRpc(validator='soft'),
         out_protocol=JsonDocument()
         )
@@ -821,7 +821,7 @@ def ident():
                 _say.append(words[_lang]['silence'])
                 _say.append(words[_lang]['silence'])
                 
-                _say.append(words[_lang]['adn'])
+                _say.append(words[_lang]['rysen'])
                 
                 #test 
                 #_say.append(AMBEobj.readSingleFile('alpha.ambe'))
@@ -2904,7 +2904,7 @@ if __name__ == '__main__':
                 words[lang][_mapword] = words[lang][_map[_mapword]]
 
     # HBlink instance creation
-    logger.info('(GLOBAL) ADN \'bridge_master.py\' -- SYSTEM STARTING...')
+    logger.info('(GLOBAL) RYSEN \'bridge_master.py\' -- SYSTEM STARTING...')
 
     
     listeningPorts = {}

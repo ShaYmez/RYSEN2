@@ -20,23 +20,23 @@ FROM python:3.11-alpine
 #ENTRYPOINT [ "/entrypoint" ]
 ENTRYPOINT ["/sbin/tini", "-g", "--", "/entrypoint"]
 
-COPY . /opt/freedmr
+COPY . /opt/rysen
 
-RUN     addgroup -g 54000 freedmr && \
-        adduser -D -u 54000 -G freedmr freedmr && \
+RUN     addgroup -g 54000 rysen && \
+        adduser -D -u 54000 -G rysen rysen && \
         apk update && \
         apk add git gcc musl-dev && \
          apk add --no-cache tini && \
         cd /opt && \
-        cd /opt/freedmr && \
+        cd /opt/rysen && \
 	ls -lah && \
         pip install --no-cache-dir -r requirements.txt && \
         apk del git gcc musl-dev && \
-        chown -R freedmr:freedmr /opt/freedmr && \
+        chown -R rysen:rysen /opt/rysen && \
         mkdir /run/priv_control/ && \
-        chown -R freedmr:freedmr /run/priv_control
+        chown -R rysen:rysen /run/priv_control
 
 COPY docker-configs/entrypoint-proxy /entrypoint
-USER freedmr
+USER rysen
 
 

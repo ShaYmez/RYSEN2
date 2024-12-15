@@ -18,7 +18,7 @@
 #
 ###############################################################################
 
-echo FreeDMR Docker installer...
+echo RYSEN Docker installer...
 
 echo Installing required packages...
 echo Install Docker Community Edition...
@@ -59,17 +59,17 @@ echo Restart docker...
 systemctl restart docker &&
 
 echo Make config directory...
-mkdir /etc/ADN-Systems &&
-mkdir -p /etc/ADN-Systems/acme.sh && 
-mkdir -p /etc/ADN-Systems/certs &&
-chmod -R 755 /etc/ADN-Systems &&
+mkdir /etc/RYSEN-Systems &&
+mkdir -p /etc/RYSEN-Systems/acme.sh && 
+mkdir -p /etc/RYSEN-Systems/certs &&
+chmod -R 755 /etc/RYSEN-Systems &&
 
 echo make json directory...
-mkdir -p /etc/ADN-Systems/data &&
-chown 54000:54000 /etc/ADN-Systems/data &&
+mkdir -p /etc/RYSEN-Systems/data &&
+chown 54000:54000 /etc/RYSEN-Systems/data &&
 
-echo Install /etc/ADN-Systems/adn.cfg ... 
-cat << EOF > /etc/ADN-Systems/adn.cfg
+echo Install /etc/RYSEN-Systems/rysen.cfg ... 
+cat << EOF > /etc/RYSEN-Systems/rysen.cfg
 #This empty config file will use defaults for everything apart from OBP and HBP config
 #This is usually a sensible choice. 
 
@@ -135,9 +135,9 @@ LONGITUDE: 000.0000
 HEIGHT: 0
 LOCATION: 9990 Parrot
 DESCRIPTION: ECHO
-URL: adn.systems
+URL: rysen.systems
 SOFTWARE_ID: 20170620
-PACKAGE_ID: MMDVM_ADN-Systems
+PACKAGE_ID: MMDVM_RYSEN-Systems
 GROUP_HANGTIME: 5
 OPTIONS:
 USE_ACL: True
@@ -147,8 +147,8 @@ TGID_TS2_ACL: PERMIT:ALL
 ANNOUNCEMENT_LANGUAGE: en_GB
 EOF
 #
-echo Install /etc/ADN-Systems/fdmr-mon.cfg ... 
-cat << EOF > /etc/ADN-Systems/fdmr-mon.cfg
+echo Install /etc/RYSEN-Systems/fdmr-mon.cfg ... 
+cat << EOF > /etc/RYSEN-Systems/fdmr-mon.cfg
 [GLOBAL]
 # Display Bridge status
 BRIDGES_INC = False
@@ -185,9 +185,9 @@ LOCAL_PEER_FILE = local_peer_ids.json
 LOCAL_TGID_FILE = local_talkgroup_ids.json
 # Number of days before we reload DMR-MARC database files.
 RELOAD_TIME = 1
-PEER_URL = https://adn.systems/files/peer_ids.json
-SUBSCRIBER_URL = https://adn.systems/files/subscriber_ids.json
-TGID_URL = https://adn.systems/files/talkgroup_ids.json
+PEER_URL = https://rysen.systems/files/peer_ids.json
+SUBSCRIBER_URL = https://rysen.systems/files/subscriber_ids.json
+TGID_URL = https://rysen.systems/files/talkgroup_ids.json
 
 
 
@@ -245,11 +245,11 @@ EOF
 
 
 echo Set perms on config directory...
-chown -R 54000 /etc/ADN-Systems &&
+chown -R 54000 /etc/RYSEN-Systems &&
 
 echo Get docker-compose.yml...
-cd /etc/ADN-Systems &&
-curl https://raw.githubusercontent.com/Amateur-Digital-Network/ADN-DMR-Peer-Server/develop/docker-configs/docker-compose.yml -o docker-compose.yml &&
+cd /etc/RYSEN-Systems &&
+curl https://raw.githubusercontent.com/Amateur-Digital-Network/RYSEN-DMR-Peer-Server/develop/docker-configs/docker-compose.yml -o docker-compose.yml &&
 
 chmod 755 /etc/cron.daily/lastheard
 
@@ -266,8 +266,8 @@ EOF
 
 /usr/sbin/sysctl -p &&
 
-echo Run ADN-Systems container...
+echo Run RYSEN-Systems container...
 docker-compose up -d
 
-echo Read notes in /etc/ADN-Systems/docker-compose.yml to understand how to implement extra functionality.
-echo ADN-Systems setup complete!
+echo Read notes in /etc/RYSEN-Systems/docker-compose.yml to understand how to implement extra functionality.
+echo RYSEN-Systems setup complete!

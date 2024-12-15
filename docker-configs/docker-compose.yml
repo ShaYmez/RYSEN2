@@ -19,18 +19,18 @@
 version: '2.4'
 services:
 
-    adn-server:
-        container_name: adn-server
+    rysen-server:
+        container_name: rysen-server
         cpu_shares: 1024
         mem_reservation: 600m
         volumes:
-            - '/etc/ADN-Systems/adn.cfg:/opt/ADN-DMR-Peer-Server/config/adn.cfg'
+            - '/etc/RYSEN-Systems/rysen.cfg:/opt/RYSEN-DMR-Peer-Server/config/rysen.cfg'
         ports:
             - '62031:62031/udp'
             #Change the below to inlude ports used for your OBP(s)
             - '62041:62041/udp'
             - '8000:8000'
-        image: 'registry.gitlab.com/hp3icc/fdmr/adn-server-single:latest'
+        image: 'registry.gitlab.com/hp3icc/fdmr/rysen-server-single:latest'
         restart: "unless-stopped"
         logging:
           driver: none
@@ -50,23 +50,23 @@ services:
             #- FDPROXY_LISTENPORT=62031
 
 
-    adn-dashboard:
-        container_name: adn-dashboard
+    rysen-dashboard:
+        container_name: rysen-dashboard
         cpu_shares: 512
         volumes:
-             - '/etc/ADN-Systems/fdmr-mon.cfg:/opt/FDMR-Monitor/fdmr-mon.cfg'
+             - '/etc/RYSEN-Systems/fdmr-mon.cfg:/opt/FDMR-Monitor/fdmr-mon.cfg'
         ports:
             - '80:80/tcp'
             - '443:443/tcp'
             - '9000:9000'
-        image: 'registry.gitlab.com/hp3icc/fdmr/adn-mon2-single:latest'
+        image: 'registry.gitlab.com/hp3icc/fdmr/rysen-mon2-single:latest'
         restart: "unless-stopped"
           #Set USE_SSL = to True to enable TLS support
           #you'll need to actually generate the certtificates too
           #using these commands when the container is running:
 
-          #docker exec -it adn-dashboard gencert.sh <admin email> <server FQDN>
-          #docker-compose restart adn-dashboard
+          #docker exec -it rysen-dashboard gencert.sh <admin email> <server FQDN>
+          #docker-compose restart rysen-dashboard
 
           #This only needs to be done once - unless the files in the volumes above are deleted.
 

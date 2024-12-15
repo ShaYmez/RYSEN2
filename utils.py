@@ -20,7 +20,7 @@
 
 #Some utilty functions from dmr_utils3 have been modified. These live here.
 
-# Also new ADN specific functions.
+# Also new RYSEN specific functions.
 
 import ssl
 from time import time
